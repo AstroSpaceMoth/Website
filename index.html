@@ -6,13 +6,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dizzy Duck Database</title>
 		<link rel="stylesheet" href="style1.css" />
+        <script type="text/javascript" src="HackTimer.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="t.min.js"></script>
     </head>
     <body>
 
         <pre id="main">
-            codegrid<ins><span id="pow-txt">---[Design tuts!]</span></ins>
-            <span id="tagline">I publish online content related to web designing,<ins>1.5</ins><br>trying to build elegant solutions for all curious learners<br>out there</span><del></del><del id="pow-trigger"></del> \\
-        </pre>
+:boot sequence initiated:<ins><span id="pow-txt">---[Design tuts!]</span></ins>
+<span id="tagline">I publish online content related to web designing,<ins>1.5</ins><br>trying to build elegant solutions for all curious learners<br>out there</span><del></del><del id="pow-trigger"></del> \\
+</pre>
+
+        <script class="terminal">
+            
+            $('#main').t({
+                speed:25,
+                caret:'<span style="color:greenyellow;">•</span>',
+                typing:function(elm,chr){
+                    if(chr.match(/\-trigger/))
+                    $('#pow-txt').show().delay(500).fadeOut(0);
+  
+                }
+            });
+        </script>
     </body>
 </html>
