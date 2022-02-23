@@ -76,8 +76,7 @@ html, body {
 
 .hero-image {
     width: 100%;
-    margin-top: -700px;
-    margin-bottom: -50px;
+    margin-top: -600px;
 }
 
 .hero-image::after {
@@ -88,12 +87,11 @@ html, body {
 
 .hero-image .hero-image-container {
     width: 60%;
-    float: right;
+    float: left;
 }
 
 .hero-image .hero-image-container img {
     width: 100%;
-    transform: scaleX(-1);
     background: transparent;
 }
 
