@@ -6,6 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dizzy Duck Database</title>
 		<link rel="stylesheet" href="style2.css" />
+        <script type="text/javascript" src="HackTimer.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="t.min.js"></script>
     </head>
     <body>
@@ -14,26 +16,24 @@
                 <!-- navbar -->
                 <div class="navbar">
                     <div class="navbar-container">
-                        <div class="site-title">Dr. Dizzy</div>
-                        <div class="site-type">database</div>
-                        <div class="site-year">2021</div>
+                        <div class="site-title">Dr. Dizzy's NFT Database</div>
+                        <div class="site-type"></div>
+                        <div class="site-year">2022</div>
                     </div>
                 </div>
                 
                 <!-- divider -->
                 <div class="divider"></div>
 
+                <!-- hero-image -->
+                <img class="image" src="DrDizzyLogoTransparent.png">
+
                 <!-- header -->
                 <div class="header">
                     <div class="header-container">
-                        <h1>Dizzy Duck<br />Database</h1>
-                    </div>
-                </div>
-
-                <!-- hero-image -->
-                <div class="hero-image">
-                    <div class="hero-image-container">
-                        <img src="WebDuckWhite.png">
+                        <pre id="main">
+<del id="message">Welcome! You may call me Dr. Dizzy.<ins>3</ins></del><ins>0.2</ins><del id="message">This is the database for my 
+Dizzy Duck NFT collection.<ins>3</ins></del></pre>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="section-header">
                     <div class="section-header-container">
                         <div class="section-title">about</div>
-                        <div class="section-order">/001</div>
+                        <div class="section-order">01</div>
                     </div>
                 </div>
 
@@ -53,8 +53,7 @@
                 <section class="about">
                     <div class="about-container">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Rerum enim quia dolorum laudantium nesciunt ut omnis, atque aperiam!
+                            
                         </p>
                         <p>
                             Aliquid, alias sapiente! Magnam suscipit obcaecati eos, 
@@ -69,7 +68,7 @@
                 <div class="section-header">
                     <div class="section-header-container">
                         <div class="section-title">projects</div>
-                        <div class="section-order">/002</div>
+                        <div class="section-order">02</div>
                     </div>
                 </div>
 
@@ -145,6 +144,22 @@
         <div class="loader-wrapper">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
+
+        <script>
+            
+            $('#main').t({
+                delay: 0,
+                speed: 10,
+                beep: false,
+                pause_on_tab_switch: true,
+                caret:'<span style="color:goldenrod;">•</span>',
+                typing:function(elm,chr){
+                    if(chr.match(/\-trigger/))
+                    $('#pow-txt').show().delay(100000).fadeOut(0);
+  
+                }
+            });
+        </script>
 
     </body>
 </html>
