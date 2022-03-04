@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dizzy Duck Database</title>
+		<link rel="stylesheet" href="style1.css" />
+        <script type="text/javascript" src="HackTimer.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="t.min.js"></script>
+    </head>
+    <body>
+        <pre id="main">
+<ins id="startline">                                                 </ins>
+
+<ins>1</ins><s>20</s><span id="headline">Dr. Dizzy's NFT Database -- Dizzy Ducks</span>
+
+<ins>0.3</ins><s>10</s><ins id="section">•start-up sequence initiated•</ins>
+
+<ins>0.5</ins><span id="tagline">  Booting Main:<ins>0.4</ins>             [DONE]</span>
+<span id="tagline">  Fetching Data:<ins>0.3</ins>            [DONE]</span>
+<span id="tagline">  Mounting Data:<ins>0.4</ins>            [DONE]</span>
+
+<span id="tagline">  Checking Network:<ins>0.5</ins>         [OK]</span>
+<span id="tagline">  Checking Memory:<ins>0.7</ins>          [OK]</span>
+
+<ins id="section">:start-up sequence completed:</ins>
+<ins id="startline">                                                 </ins>
+
+
+<ins>0.3</ins><ins id="section">:user interface calibration:</ins>
+
+<ins>0.5</ins><span id="tagline">  IP Address:<ins>0.2</ins>               [HIDDEN]</span>
+<span id="tagline">  User Access:<ins>0.6</ins>              [GRANTED]</span>
+<span id="tagline">  User Privileges:<ins>0.4</ins>          [GUEST]</span>
+
+<span id="tagline">  Loading User Space:<ins>0.7</ins>       [DONE]</span>
+
+<ins id="section">:user interface calibrated:</ins>
+<ins id="startline">                                                 </ins>
+
+
+<ins>0.5</ins><ins id="section">:launching database:</ins>
+
+<ins>0.2</ins><s>40</s><a href="main.html" id="launch">ENTER</a></pre>
+
+        <script>
+            
+            $('#main').t({
+                delay: 0,
+                speed: 10,
+                beep: true,
+                pause_on_tab_switch: true,
+                caret:'<span style="color:goldenrod;">•</span>',
+                typing:function(elm,chr){
+                    if(chr.match(/\-trigger/))
+                    $('#pow-txt').show().delay(100000).fadeOut(0);
+  
+                }
+            });
+        </script>
+    </body>
+</html>
