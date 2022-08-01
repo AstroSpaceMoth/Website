@@ -18,6 +18,6 @@ body.onload = function get_random_image(){
 
     selected_image = image_array[random_index]
 
-    document.getElementById('preview').src = `https://github.com/AstroSpaceMoth/Website/blob/master/${selected_image}`
+    document.getElementById('preview').src = `../${selected_image}`
     filename = selected_image
 }
