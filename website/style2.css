@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&family=Kdam+Thmor+Pro&family=Six+Caps&display=swap');
+
+html,
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+    color: #fff;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h-divider {
+  width: 100%;
+  height: 2px;
+  background: #fff;
+}
+
+.cursor,
+.follow {
+    position: absolute;
+    pointer-events: none;
+    width: 0.6rem;
+    height: 0.6rem;
+    transform: translate(-50%, -50%);
+}
+
+.cursor {
+    background-color: #fff;
+    border-radius: 100%;
+}
+
+.icons {
+  fill: lightgrey;
+  margin-bottom: -0.8vh;
+  height: 2.5vh;
+  width: fit-content;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper .container1 {
+  width: 96%;
+  margin: 0px auto;
+}
+
+.wrapper2 {
+  width: 100%;
+}
+
+.wrapper2 .container2 {
+  width: 96%;
+  margin: 0px auto;
+}
+
+.navbar .navbar-container {
+  display: flex;
+  padding: 12px 0;
+  font-size: 16px;
+  justify-content: space-between;
+}
+
+.navbar .navbar-container .site-title {
+  flex-grow: 1;
+  text-align: left;
+  color: lightgrey;
+  text-decoration: none;
+}
+
+.navbar .navbar-container .site-type {
+  flex-grow: 1;
+  text-align: center;
+  color: lightgrey;
+}
+
+.navbar .navbar-container .site-year {
+  flex-grow: 1;
+  text-align: right;
+  color: lightgrey;
+}
+
+.footer .footer-container {
+  margin-top: auto;
+  display: flex;
+  padding: 12px 0px;
+  font-size: 16px;
+  justify-content: space-evenly;
+  align-items: bottom;
+}
+
+.footer .footer-container .site-title {
+  flex-grow: 2;
+  text-align: left;
+  color: lightgrey;
+}
+
+.footer .footer-container .site-type {
+  flex-grow: 1;
+  text-align: center;
+  color: lightgrey;
+}
+
+.footer .footer-container .site-year {
+  flex-grow: 2;
+  text-align: right;
+  color: lightgrey;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: auto;
+  cursor: pointer;
+  font-size: 9em;
+  font-family: 'Six Caps', sans-serif;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.5s ease-out;
+  overflow:hidden;
+  height: 10rem;
+  width: fit-content;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: auto;
+  border-top: 2px solid #fff;
+  padding-bottom: 5vh;
+  border-bottom: 2px solid #fff;
+}
+
+.image {
+  height: 0px;
+}
+
+.box {
+  max-width: 100%;
+  text-align: left;
+}
+.box > *, .minter > *{
+  display: flex;
+  width: 100% !important;
+  margin-bottom: 1rem;
+}
+.nice-select {
+  margin-bottom: 10px;
+  color: black;
+}
+.nice-select-dropdown {
+  width: 100%;
+}
+button {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 10px;
+  border: none;
+  text-decoration: none;
+}
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+}
+.label {
+  font-size: 18px;
+  font-weight: bold;
+}
+h1 {
+  margin: 0;
+  font-size: 30px;
+  box-sizing: border-box;
+  letter-spacing: -1px;
+  text-align: center;
+}
+h1 a {
+  color: white;
+  text-decoration: none;
+}
+.invite {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: left;
+  color: white;
+  font-size: 16px;
+}
+.invites a {
+  color: white;
+}
+.invites {
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  display: table !important;
+  margin-top: 10px;
+}
+td, th {
+  padding: 5px;
+  font-size: 14px;
+}
+th {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+tr {
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+.btn {
+  background: rgba(0,0,0,0.1); 
+  padding: 5px 10px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.hidden {
+  display: none !important;
+}
+.loading {
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 15px;
+  background: rgba(255,255,255,0.1);
+  margin-top: 20px;
+  border-radius: 50px;
+}
+tr img {
+  height: 20px;
+}
+tr a {
+  color: white;
+}
+.token {
+  background: rgba(0,0,0,0.3);
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.power {
+  margin-top: 20px;
+  padding-top: 10px;
+}
+.line {
+  margin: 0px;
+}
+.line a {
+  font-size: 12px;
+}
+.b {
+  font-weight: bold;
+  text-transform: none;
+  padding-left: 5px;
+  border-left: 10px solid white;
+  margin-bottom: 5px;
+}
+.mintingapp {
+  display: flex;
+  flex-direction: column;
+  width: 20% !important;
+  margin: auto;
+  margin-top: 20vh;
+  padding-left: 20px;
+  border-left: 2px solid #fff;
+}
+
+#mint {
+  color: goldenrod;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+@media only screen and (max-width: 800px) {
+  .mintingapp {
+    display: flex;
+    flex-direction: column;
+    width: 90% !important;
+    margin: auto;
+    margin-top: 20vh;
+    padding-left: 20px;
+    border-left: 2px solid #fff;
+  }
+
+  .button {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding: 0px;
+    cursor: pointer;
+    font-size: 4vh !important;
+    font-family: 'Six Caps', sans-serif;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #fff;
+    text-decoration: none;
+    overflow: hidden;
+    height: 4.5vh !important;
+    width: fit-content;
+    text-decoration: none;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0%;
+    padding-left: 0%;
+    height: 40vh;
+    background-color: #000;
+    overflow: hidden;
+    align-items: center;
+    font-family: sans-serif;
+    border-left: 2px solid #fff;
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    width: auto;
+    border-top: 2px solid #fff;
+    padding-bottom: 1vh;
+    border-bottom: 2px solid #fff;
+  }
+
+  .navbar .navbar-container {
+    display: flex;
+    padding: 12px 0;
+    font-size: 1.2vh !important;
+    justify-content: space-between;
+  }
+
+  .footer .footer-container {
+    display: flex;
+    padding: 12px 0;
+    font-size: 1.2vh !important;
+    justify-content: space-between;
+  }
+}

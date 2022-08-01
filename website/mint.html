@@ -1,0 +1,219 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script src="https://unpkg.com/nice-select2@1.0.0/dist/js/nice-select2.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/nice-select2@1.0.0/dist/css/nice-select2.css" rel="stylesheet">
+<link href="style2.css" rel="stylesheet">
+<link href="custom.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0-rc.0/web3.min.js"></script>
+<script src="https://unpkg.com/f0js/dist/f0.js"></script>
+<script src="handleerror.js"></script>
+<script id="template" type="text/x-handlebars-template">
+  <div class="mintingapp">
+  <div class='label'>{{price}} a piece</div>
+  <div class='label'>#{{current}} of {{supply}}</div>
+  <div class='minter'>
+    <select id='count'>
+      <option value="" selected disabled hidden>Select mint count</option>
+      {{#each items}}
+      <option value={{count}}>{{count}}</option>
+      {{/each}}
+    </select>
+    <button id='mint'>mint</button>
+  </div>
+  <div class='console'></div>
+  <div class='loading hidden'>
+    <i class="fa-solid fa-chevron-up fa-flip"></i> minting...
+  </div>
+  <div class='power'>
+    <div class='line'>
+      <div class='b'>verified contract</div>
+      <a target="_blank" href="{{etherscan}}">{{contract}}</a>
+    </div>
+    <div class='line'>
+      <div class='b'>collection explorer</div>
+      <a target="_blank" href="https://open.factoria.app/contract/#{{contract}}">Factoria</a>
+    </div>
+  </div>
+  </div>
+</script>
+<script id="mint-template" type="text/x-handlebars-template">
+<table class='table'>
+<tr>
+  <th><img src="opensea.png"></th>
+  <th><img src="looksrare.png"></th>
+  <th><img src="rarible.png"></th>
+</tr>
+{{#each items}}
+<tr>
+  <td><a class='token' target="_blank" href="{{opensea}}">token #{{tokenId}}</a></td>
+  <td><a class='token' target="_blank" href="{{looksrare}}">token #{{tokenId}}</a></td>
+  <td><a class='token' target="_blank" href="{{rarible}}">token #{{tokenId}}</a></td>
+</tr>
+{{/each}}
+</table>
+</script>
+<script>
+const f0 = new F0()
+const web3= new Web3(window.ethereum)
+const { key, address } = f0.parseURL(location.href)
+const template = Handlebars.compile(document.querySelector("#template").innerHTML);
+const mintTemplate = Handlebars.compile(document.querySelector("#mint-template").innerHTML);
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.ethereum.send('eth_requestAccounts');
+  let c = await fetch("box.json").then((r) => {
+    return r.json()
+  })
+  let cached = null
+  cached = await fetch("cached.json").then((res) => { return res.json() }).catch((e) => { })
+  let net = await web3.eth.getChainId()
+  let netPrefix = (net.toString() === "4" ? "rinkeby." : "")
+  console.log("c", c, netPrefix)
+  let etherscan = `https://${netPrefix}etherscan.io/address/${c.contract}#code`
+  try {
+    await f0.init({
+      web3,
+      contract: address,
+      network: c.network,
+      cached,
+    })
+    let invite = await f0.invite(key)
+    let placeholder = await f0.placeholder()
+    const name = await f0.name()
+    const symbol = await f0.symbol()
+    const nextId = await f0.nextId()
+    const config = await f0.config()
+    let items = []
+    for(let i=1; i<=invite.condition.converted.limit; i++) {
+      items.push(i)
+    }
+    let image = (cached && cached[placeholder.converted.image] ? cached[placeholder.converted.image] : placeholder.converted.image)
+    document.querySelector(".box").innerHTML = template({
+      image: image,
+      etherscan,
+      contract: c.contract,
+      title: `${name} (${symbol})`,
+      items: items.map((item) => { return { count: item } }),
+      max: invite.condition.converted.limit,
+      price: `${invite.condition.converted.eth} ETH`,
+      current: nextId,
+      supply: config.converted.supply,
+      account: f0.account,
+      key: key,
+    })
+    NiceSelect.bind(document.querySelector("select"))
+    document.querySelector("#mint").addEventListener("click", async (e) => {
+      document.querySelector(".minter").classList.add("hidden")
+      document.querySelector(".loading").classList.remove("hidden")
+      let count = parseInt(document.querySelector("#count").value)
+      if (count === 0) {
+        alert("Please enter a number greater than 0")
+      } else {
+        try {
+          let tokens = await f0.mint(key, count)
+          document.querySelector(".loading").classList.add("hidden")
+          document.querySelector(".console").innerHTML = mintTemplate({
+            items: tokens.map((token) => {
+              let i = { tokenId: token.tokenId }
+              if (token.links.opensea) i.opensea = token.links.opensea
+              if (token.links.rarible) i.rarible = token.links.rarible
+              if (token.links.looksrare) i.looksrare = token.links.looksrare
+              return i
+            })
+          })
+        } catch (e) {
+          document.querySelector(".box").innerHTML = `<h1>${handleError(e.message)}</h1>`
+        }
+      }
+    })
+  } catch (e) {
+    document.querySelector(".box").innerHTML = `<h1>${e.message}</h1>`
+  }
+})
+</script>
+</head>
+<body>
+  <div class="wrapper">
+      <div class="container1">
+          <div class="navbar">
+              <div class="navbar-container">
+                  <div><a class="site-title" href="index.html">Dizzy Duck NFT</a></div>
+                  <div class="site-type"></div>
+                  <div class="site-year">5000 piece collection</div>
+              </div>
+          </div>
+          <div class="h-divider"></div>
+      </div>
+
+      <div class="box"></div>
+  </div>
+
+  <div class="wrapper2">
+      <div class="container2">
+          <div class="h-divider"></div>
+          <div class="footer">
+              <div class="footer-container">
+                  <div class="site-title">By AstroSpaceMoth
+                      <a href="https://twitter.com/astrospacemoth">
+                          <svg class="icons" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 16" width="32px" height="32px"><path d="M 15 3.296875 C 14.476563 3.523438 13.949219 3.691406 13.367188 3.746094 C 13.949219 3.410156 14.417969 2.84375 14.648438 2.226563 C 14.066406 2.5625 13.484375 2.789063 12.84375 2.902344 C 12.257813 2.339844 11.5 2 10.683594 2 C 9.109375 2 7.824219 3.242188 7.824219 4.765625 C 7.824219 4.988281 7.824219 5.214844 7.882813 5.386719 C 4.875 5.386719 2.8125 3.691406 1.414063 2 C 1.121094 2.394531 1.003906 2.902344 1.003906 3.410156 C 1.003906 4.367188 1.53125 5.214844 2.289063 5.722656 C 1.820313 5.667969 1.355469 5.554688 1.003906 5.386719 C 1.003906 5.386719 1.003906 5.386719 1.003906 5.441406 C 1.003906 6.796875 1.996094 7.921875 3.28125 8.148438 C 3.046875 8.203125 2.8125 8.261719 2.519531 8.261719 C 2.347656 8.261719 2.171875 8.261719 1.996094 8.207031 C 2.347656 9.335938 3.976563 10.632813 5.257813 10.632813 C 4.265625 11.363281 3.34375 12 1.5 12 C 1.265625 12 1.453125 12 1 12 C 2.28125 12.789063 3.800781 13 5.375 13 C 10.683594 13 13.542969 8.769531 13.542969 5.101563 C 13.542969 4.988281 13.542969 4.878906 13.542969 4.765625 C 14.125 4.367188 14.59375 3.863281 15 3.296875"/></svg>
+                      </a>
+                      <a href="https://www.instagram.com/astrospacemoth/">
+                          <svg class="icons" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 16" width="32px" height="32px"><path d="M 4.773438 1 C 2.695313 1 1 2.695313 1 4.773438 L 1 10.230469 C 1 12.304688 2.695313 14 4.773438 14 L 10.230469 14 C 12.304688 14 14 12.304688 14 10.226563 L 14 4.773438 C 14 2.695313 12.304688 1 10.226563 1 Z M 4.773438 2 L 10.226563 2 C 11.765625 2 13 3.234375 13 4.773438 L 13 10.226563 C 13 11.765625 11.765625 13 10.230469 13 L 4.773438 13 C 3.234375 13 2 11.765625 2 10.230469 L 2 4.773438 C 2 3.234375 3.234375 2 4.773438 2 Z M 11.5 3 C 11.222656 3 11 3.222656 11 3.5 C 11 3.777344 11.222656 4 11.5 4 C 11.777344 4 12 3.777344 12 3.5 C 12 3.222656 11.777344 3 11.5 3 Z M 7.5 4 C 5.574219 4 4 5.574219 4 7.5 C 4 9.425781 5.574219 11 7.5 11 C 9.425781 11 11 9.425781 11 7.5 C 11 5.574219 9.425781 4 7.5 4 Z M 7.5 5 C 8.886719 5 10 6.113281 10 7.5 C 10 8.886719 8.886719 10 7.5 10 C 6.113281 10 5 8.886719 5 7.5 C 5 6.113281 6.113281 5 7.5 5 Z"/></svg>
+                      </a>
+                  </div>
+                  <div class="site-type"></div>
+                  <div class="site-year">2022</div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<script>
+document.body.style.cursor = "none";
+
+var cursor = document.createElement("div");
+cursor.classList.add("cursor");
+document.body.appendChild(cursor);
+
+var follow = document.createElement("div");
+follow.classList.add("follow");
+document.body.appendChild(follow);
+
+function move(obj, event) {
+  obj.style = "";
+  obj.style.top = event.clientY + "px";
+  obj.style.left = event.clientX + "px";
+}
+
+if (cursor) {
+  window.addEventListener("mousemove", function(event) {
+      var e = event;
+      var t = e.target;
+      var f = follow;
+      var c = cursor;
+
+      if (t.tagName == "A") {
+          c.style.backgroundColor = "transparent";
+
+          f.style.top = t.offsetTop + "px";
+          f.style.left = t.offsetLeft + "px";
+          f.style.width = t.clientWidth + "px";
+          f.style.height = t.clientHeight + "px";
+
+          f.classList.add("on-focus");
+      } else {
+          move(c, e);
+          move(f, e);
+          f.classList.remove("on-focus");
+      }
+  });
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@barba/core"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
