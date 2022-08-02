@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 <script src="https://unpkg.com/f0js/dist/f0.js"></script>
 <script src="handleerror.js"></script>
-<script id="template" type="text/x-handlebars-template">
+<script id="template" type="text/x-handlebars-template" alt="Must have Metamask">
   {{#each items}}
     <div class="text-container">
       <a class="button" href="mint.html#address={{address}}&key={{key}}">Mint</a>
@@ -92,6 +92,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <p class="info">
                             The art and Metadata are generated simultaneously. The attributes of each piece has been set and will never change. The duck you mint will always be the same.
                         </p>
+
+                        <a class="info2" href="https://metamask.io/">
+                          MetaMask Required
+                        </a>
                         <div class="box"></div>
                     </div>
 

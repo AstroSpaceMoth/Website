@@ -21,7 +21,9 @@
       <option value={{count}}>{{count}}</option>
       {{/each}}
     </select>
-    <button id='mint'>mint</button>
+    <div class="buy-button">
+      <button id='mint'>mint</button>
+    </div>
   </div>
   <div class='console'></div>
   <div class='loading hidden'>
@@ -29,7 +31,7 @@
   </div>
   <div class='power'>
     <div class='line'>
-      <div class='b'>verified contract</div>
+      <div class='b'>View on Etherscan</div>
       <a target="_blank" href="{{etherscan}}">{{contract}}</a>
     </div>
     <div class='line'>

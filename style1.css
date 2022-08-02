@@ -27,6 +27,12 @@ p {
     font-size: 22px;
 }
 
+.info2 {
+    color: #f6851b;
+    font-size: 24px !important;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
 .icons {
     fill: lightgrey;
     margin-bottom: -0.8vh;
@@ -219,6 +225,12 @@ p {
         font-family: 'Kdam Thmor Pro', sans-serif;
         font-size: 12px;
     }
+
+    .info2 {
+        color: #f6851b;
+        font-size: 10px !important;
+    }
+    
 
     .button-container p {
         font-size: 1.2vh;
